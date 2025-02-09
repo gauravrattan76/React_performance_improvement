@@ -3,7 +3,7 @@ Lazy Loading-
 
 Lazy loading in react can be done by dynamic  importing
 
-dynamic imports are mainly used to lazy load components with React.lazy.
+dynamic imports are mainly used to lazy load components with React.lazy. for dynamic imports we need the component to be default export.
 React.lazy loads the component asynchronously.
 Suspense provides a fallback UI while loading.
 
