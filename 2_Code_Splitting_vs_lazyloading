@@ -1,0 +1,60 @@
+Code splittings vs lazy loading-
+
+
+Code splitting = Breaking JavaScript into chunks.
+
+
+Code splitting is the process of breaking a large JavaScript bundle into smaller chunks. This helps optimize performance by loading only the required code when needed.
+
+
+Code splitting is often done using dynamic imports (import()).
+js
+CopyEdit
+
+
+const LazyComponent = React.lazy(() => import("./LazyComponent"));
+
+Webpack automatically splits this into a separate chunk file.
+
+__________________________________________
+
+
+Lazy loading is the practice of delaying the loading of a component or resource until it is needed.
+
+
+import React, { Suspense } from "react"; 
+// Lazy load component
+ const LazyComponent = React.lazy(() => import("./LazyComponent"));
+ const App = () =>
+ ( <Suspense fallback={<div>Loading...</div>}> <LazyComponent /> 
+</Suspense> );
+
+
+React.lazy() + Suspense enables lazy loading by deferring the component’s loading.
+
+
+Code Splitting creates separate chunks for different parts of the app. ✅ Lazy Loading loads those chunks only when needed.
+* Code Splitting = The technical process of breaking code into smaller files.
+* Lazy Loading = The strategy of loading those files only when necessary.
+📌 Lazy loading is a use case of code splitting!
+
+_________________
+
+
+Even if you split code, it doesn’t mean it’s lazy loaded. Example:
+js
+CopyEdit
+import("./utils").then((module) => {
+  module.default();
+});
+
+
+This splits the code, but it loads immediately (not lazy-loaded).
+
+Code splitting = Breaking JavaScript into chunks.
+Lazy loading = Deferring loading of chunks until needed.
+Together, they make React apps faster and more efficient!
+
+
+
+
