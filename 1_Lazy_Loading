@@ -1,0 +1,101 @@
+Lazy Loading-
+
+
+Lazy loading in react can be done by dynamic  importing
+
+dynamic imports are mainly used to lazy load components with React.lazy.
+React.lazy loads the component asynchronously.
+Suspense provides a fallback UI while loading.
+
+
+Dynamic imports use JavaScript’s import() function, which returns a Promise that resolves to the module.
+
+import('./SomeModule').then((module) =>
+ { console.log(module.default); // Access the default export });
+
+
+Advantages - 
+
+✅ Reduces initial bundle size (faster page load).
+✅ Loads components only when needed (better performance).
+✅ Optimizes large applications with code splitting.
+
+
+
+We can lazy load by using React.lazy and Suspense.
+
+
+Import component lazy using dynamic imports
+
+
+const CompLazy = lazy(() =>  import('./components/Comp2'))
+
+
+
+Use Suspense with a fallback to show the data
+
+
+<Suspense fallback={<div>Loading...</div>}> <CompLazy /> </Suspense>
+
+
+_________________________________
+
+
+Entire code -
+
+Here what happens if we lazily import that 3kb component is loaded lazily
+
+
+If on button click it loads only on button click that remaining 3kb items
+
+
+If direct, it will wait for the entire items to load and then that 3kb data lazily, we will see a separate chunk for that component
+
+
+
+import React,{useState,lazy, Suspense} from 'react'
+
+import './App.css';
+import Comp1 from './components/Comp1';
+const CompLazy = lazy(() =>  import('./components/Comp2'))
+
+
+function App() {
+   const [show,setShow] = useState(false)
+
+  return (
+    <div className="App">
+      This is the header component
+      <br />
+      This is the main content area
+      <br />
+      <Comp1 />
+      <br />
+      {/* <Suspense fallback={<>Loading component2</>} >
+      <CompLazy />
+     </Suspense> */}
+      <button onClick ={() => setShow(true)} >show  component2</button><br />
+   {
+    show && (
+      <Suspense fallback={<>Loading component2</>} >
+      <CompLazy />
+     </Suspense>
+    )
+   }
+  
+   {/* <Comp2 /> */}
+   {/* {
+    show && (
+     
+      <Comp2 />
+
+    )
+   } */}
+
+    </div>
+    
+  );
+}
+
+export default App;
+
