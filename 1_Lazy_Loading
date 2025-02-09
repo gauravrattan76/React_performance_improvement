@@ -7,6 +7,15 @@ dynamic imports are mainly used to lazy load components with React.lazy. for dyn
 React.lazy loads the component asynchronously.
 Suspense provides a fallback UI while loading.
 
+when we do-
+
+const CompLazy = lazy(() =>  import('./components/Comp2'))
+
+
+dynmaic import returs a promise which is then converted into a module which returns default exported component
+
+
+
 
 Dynamic imports use JavaScript’s import() function, which returns a Promise that resolves to the module.
 
