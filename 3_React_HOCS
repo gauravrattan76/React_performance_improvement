@@ -1,0 +1,60 @@
+Higher order components-
+—————————————————————
+In React, a higher-order function (HOC) is a function that takes a component and returns a new component, typically by enhancing or modifying its behavior.
+
+
+import React, { useEffect, useState } from 'react'
+
+
+// component that will be passed
+const Usercomp = ({name,age}) => (
+    <>
+    Username is : {name}
+    <br />
+    age is :{age}
+    </>
+)
+
+
+// takes one function and return the another functional component
+const Higherfunction = (RecFunc) => {
+    return function RetFunc({isLoading,...props}){
+        if(isLoading)
+        {
+            return <h2>Loading......</h2>
+        }
+        else{
+            return <RecFunc name={props.name} age={props.age} />
+        }
+
+    }
+
+}
+
+
+// return a functional component
+const Mainfunc = Higherfunction(Usercomp);
+
+
+const Comp1 = () =>{
+
+    const [loading, setLoading] = useState(true)
+
+    useEffect( () =>{
+        setTimeout(() =>{
+         setLoading(false)
+        },4000)
+    },[])
+    
+    return(
+    <>
+    This is the main components
+    <br />
+    <br />
+     <Mainfunc isLoading={loading} name="gaurav" age="26" />
+    </>
+)}
+
+
+
+export default Comp1
